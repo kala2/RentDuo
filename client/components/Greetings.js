@@ -1,8 +1,7 @@
 import React from 'react';
-import Greetings from './Greetings';
 
 export default () => {
   return (
-    <Greetings />
+    <h1>Hi from themis</h1>
   );
 }
