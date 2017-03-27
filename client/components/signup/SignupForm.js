@@ -1,5 +1,7 @@
 import React from 'react';
 import classnames from 'classnames';
+import validateInput from '../../../server/shared/validations/signup';
+import TextFieldGroup from '../common/TextFieldGroup';
 
 class SignupForm extends React.Component {
   constructor(props) {
@@ -21,14 +23,25 @@ class SignupForm extends React.Component {
       this.setState({ [event.target.name]: event.target.value });
     }
 
+    isValid() {
+      const { errors, isValid } = validateInput(this.state);
+
+      if (!isValid) {
+        this.setState({ errors });
+      }
+      return isValid;
+    }
+
     handleSubmit(event) {
       event.preventDefault();
-      this.setState({ errors: {} , isLoading: true });
-      console.log(this.state);
-      this.props.userSignupRequest(this.state).then(
-        () => {},
-        ({ data }) => this.setState({ errors: data, isLoading: false  })
-      );
+      if (this.isValid()) {
+        this.setState({ errors: {} , isLoading: true });
+        console.log(this.state);
+        this.props.userSignupRequest(this.state).then(
+          () => {},
+          ({ data }) => this.setState({ errors: data, isLoading: false  })
+        );
+      }
     }
 
     render() {
@@ -36,30 +49,39 @@ class SignupForm extends React.Component {
       return (
         <form onSubmit={this.handleSubmit}>
           <h1>This is a form</h1>
-          <div className={classnames("form-group", {'has-error': errors.username})}>
-                <label className="control-label">Username</label>
-                <input type="text" name="username" className="form-control" value={this.state.username} onChange={this.handleChange} />
 
-                {errors.username && <span className="help-block">{errors.username}</span>}
-          </div>
-          <div className={classnames("form-group", {'has-error': errors.email})}>
-                <label className="control-label">Email</label>
-                <input type="text" name="email" className="form-control" value={this.state.email} onChange={this.handleChange} />
+          <TextFieldGroup
+            error={errors.username}
+            label="username"
+            onChange={this.handleChange}
+            value={this.state.username}
+            field="username"
+          />
 
-                {errors.email && <span className="help-block">{errors.email}</span>}
-          </div>
-          <div className={classnames("form-group", {'has-error': errors.password})}>
-                <label className="control-label">Password</label>
-                <input type="text" name="password" className="form-control" value={this.state.password} onChange={this.handleChange} />
+          <TextFieldGroup
+            error={errors.email}
+            label="email"
+            onChange={this.handleChange}
+            value={this.state.email}
+            field="email"
+          />
 
-                {errors.password && <span className="help-block">{errors.password}</span>}
-          </div>
-          <div className={classnames("form-group", {'has-error': errors.passwordConfirmation})}>
-                <label className="control-label">Passwrod Confirmation</label>
-                <input type="text" name="passwordConfirmation" className="form-control" value={this.state.passwordConfirmation} onChange={this.handleChange} />
+          <TextFieldGroup
+            error={errors.password}
+            label="password"
+            onChange={this.handleChange}
+            value={this.state.password}
+            field="password"
+          />
 
-                {errors.passwordConfirmation && <span className="help-block">{errors.passwordConfirmation}</span>}
-          </div>
+          <TextFieldGroup
+            error={errors.passwordConfirmation}
+            label="passwordConfirmation"
+            onChange={this.handleChange}
+            value={this.state.passwordConfirmation}
+            field="passwordConfirmation"
+          />
+
           <div className="form-group">
                 <button disabled={this.state.isLoading} className="btn btn-primary btn-lg">Sign up
                 </button>
