@@ -1,12 +1,17 @@
 import express from 'express';
 import path from 'path';
+import bodyParser from 'body-parser';
 
 import webpack from 'webpack';
 import webpackMiddleware from 'webpack-dev-middleware';
 import webpackConfig from '../webpack.config.dev';
 import webpackHotMiddleware from 'webpack-hot-middleware';
 
+import users from './routes/users';
+
 let app = express();
+
+app.use(bodyParser.json());
 
 const compiler = webpack(webpackConfig);
 
@@ -15,7 +20,10 @@ app.use(webpackMiddleware(compiler, {
   publicPath: webpackConfig.output.publicPath,
   noInfo: true
 }));
+
 app.use(webpackHotMiddleware(compiler));
+
+app.use('/api/users', users);
 
 app.get('/*', (req, res) => {
   res.sendFile(path.join(__dirname, './index.html'));
