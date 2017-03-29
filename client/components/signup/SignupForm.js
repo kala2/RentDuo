@@ -13,15 +13,37 @@ class SignupForm extends React.Component {
         password: '',
         passwordConfirmation: '',
         errors: {},
-        isLoading: false
+        isLoading: false,
+        invalid: false
       };
 
       this.handleChange = this.handleChange.bind(this);
       this.handleSubmit = this.handleSubmit.bind(this);
+      this.checkUserExists = this.checkUserExists.bind(this);
     }
 
     handleChange(event) {
       this.setState({ [event.target.name]: event.target.value });
+    }
+
+    checkUserExists(event) {
+      const field = event.target.name;
+      const value = event.target.value;
+
+      if (value !== '' ) {
+        this.props.isUserExists(value).then(res => {
+            let errors = this.state.errors;
+            let invalid;
+            if (res.data.user) {
+               errors[field] = 'there is user with this ' + field;
+               invalid = true;
+            } else {
+              errors[field] = '';
+              invalid = false;
+            }
+            this.setState({ errors, invalid });
+        });
+      }
     }
 
     isValid() {
@@ -61,6 +83,7 @@ class SignupForm extends React.Component {
             error={errors.username}
             label="username"
             onChange={this.handleChange}
+            checkUserExists={this.checkUserExists}
             value={this.state.username}
             field="username"
           />
@@ -69,6 +92,7 @@ class SignupForm extends React.Component {
             error={errors.email}
             label="email"
             onChange={this.handleChange}
+            checkUserExists={this.checkUserExists}
             value={this.state.email}
             field="email"
           />
@@ -90,7 +114,7 @@ class SignupForm extends React.Component {
           />
 
           <div className="form-group">
-                <button disabled={this.state.isLoading} className="btn btn-primary btn-lg">Sign up
+                <button disabled={this.state.isLoading || this.state.invalid} className="btn btn-primary btn-lg">Sign up
                 </button>
           </div>
         </form>
@@ -100,7 +124,8 @@ class SignupForm extends React.Component {
 
 SignupForm.propTypes = {
   userSignupRequest: React.PropTypes.func.isRequired,
-  addFlashMessage: React.PropTypes.func.isRequired
+  addFlashMessage: React.PropTypes.func.isRequired,
+  isUserExists: React.PropTypes.func.isRequired
 }
 
 SignupForm.contextTypes = {
