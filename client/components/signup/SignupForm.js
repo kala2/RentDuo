@@ -27,23 +27,23 @@ class SignupForm extends React.Component {
     }
 
     checkUserExists(event) {
-      // const field = event.target.name;
-      // const value = event.target.value;
-      //
-      // if (value !== '' ) {
-      //   this.props.isUserExists(value).then(res => {
-      //       let errors = this.state.errors;
-      //       let invalid;
-      //       if (res.data.user) {
-      //          errors[field] = 'there is user with this ' + field;
-      //          invalid = true;
-      //       } else {
-      //         errors[field] = '';
-      //         invalid = false;
-      //       }
-      //       this.setState({ errors, invalid });
-      //   });
-      // }
+      const field = event.target.name;
+      const value = event.target.value;
+
+      if (value !== '' ) {
+        this.props.isUserExists(value).then(res => {
+            let errors = this.state.errors;
+            let invalid;
+            if (res.data.user) {
+               errors[field] = 'there is user with this ' + field;
+               invalid = true;
+            } else {
+              errors[field] = '';
+              invalid = false;
+            }
+            this.setState({ errors, invalid });
+        });
+      }
     }
 
     isValid() {
@@ -59,7 +59,6 @@ class SignupForm extends React.Component {
       event.preventDefault();
       if (this.isValid()) {
         this.setState({ errors: {} , isLoading: true });
-        console.log(this.state);
         this.props.userSignupRequest(this.state).then(
           () => {
             this.props.addFlashMessage({

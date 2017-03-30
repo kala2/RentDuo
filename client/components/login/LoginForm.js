@@ -2,7 +2,7 @@ import React from 'react';
 import classnames from 'classnames';
 import validateInput from '../../../server/shared/validations/login';
 import { connect } from 'react-redux';
-import { login } from '../../actions/loginActions';
+import { login } from '../../actions/authActions';
 import TextFieldGroup from '../common/TextFieldGroup';
 import { browserHistory } from 'react-router';
 
@@ -37,7 +37,6 @@ class LoginForm extends React.Component {
       event.preventDefault();
       if (this.isValid()) {
         this.setState({ errors: {} , isLoading: true });
-        console.log(this.state);
         this.props.login(this.state).then(
           (res) => this.context.router.push('/'),
           (err) => this.setState({ errors: err.response.data.errors, isLoading: false  })

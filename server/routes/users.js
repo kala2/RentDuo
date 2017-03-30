@@ -7,8 +7,8 @@ import isEmpty from 'lodash/isEmpty';
 let router = express.Router();
 
 function validateInput(data, otherValidations) {
-  let { errors } = otherValidations(data);
 
+  let { errors } = otherValidations(data);
 
   return User.query({
     where: ({ email: data.email }),
