@@ -27,23 +27,23 @@ class SignupForm extends React.Component {
     }
 
     checkUserExists(event) {
-      const field = event.target.name;
-      const value = event.target.value;
-
-      if (value !== '' ) {
-        this.props.isUserExists(value).then(res => {
-            let errors = this.state.errors;
-            let invalid;
-            if (res.data.user) {
-               errors[field] = 'there is user with this ' + field;
-               invalid = true;
-            } else {
-              errors[field] = '';
-              invalid = false;
-            }
-            this.setState({ errors, invalid });
-        });
-      }
+      // const field = event.target.name;
+      // const value = event.target.value;
+      //
+      // if (value !== '' ) {
+      //   this.props.isUserExists(value).then(res => {
+      //       let errors = this.state.errors;
+      //       let invalid;
+      //       if (res.data.user) {
+      //          errors[field] = 'there is user with this ' + field;
+      //          invalid = true;
+      //       } else {
+      //         errors[field] = '';
+      //         invalid = false;
+      //       }
+      //       this.setState({ errors, invalid });
+      //   });
+      // }
     }
 
     isValid() {
@@ -68,7 +68,7 @@ class SignupForm extends React.Component {
             });
             this.context.router.push('/');
           },
-          ({ data }) => this.setState({ errors: data, isLoading: false  })
+          (err) => this.setState({ errors: err.response.data, isLoading: false  })
         );
       }
     }
