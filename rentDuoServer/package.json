@@ -27,6 +27,7 @@
     "knex": "^0.12.9",
     "lodash": "^4.17.4",
     "pg": "^6.1.5",
+    "react-inline-css": "^2.3.0",
     "shortid": "^2.2.8",
     "validator": "^7.0.0"
   }
