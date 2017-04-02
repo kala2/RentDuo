@@ -6,7 +6,9 @@ class Greetings extends React.Component {
         <div>
           <br/>
           <div className="jumbotron container">
-            <h1>Hi from home</h1>
+            <div className="pull-left">
+              <h1>Hi from home</h1>
+            </div>            
           </div>
         </div>
 
