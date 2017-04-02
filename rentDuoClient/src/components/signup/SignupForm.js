@@ -105,7 +105,7 @@ class SignupForm extends React.Component {
     }
 
     render() {
-      const { errors } =this.state;
+      const { errors } = this.state;
       return (
         <form onSubmit={this.handleSubmit}>
           <h1>This is a form</h1>
