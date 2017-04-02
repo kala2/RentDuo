@@ -26,7 +26,7 @@ class NavigationBar extends React.Component {
       return (
           <div className="container-fluid">
             <div className="row">
-               <a href={`/`}><img src={require('./icons/rentDuo.png')} alt="" height="70" /></a>
+               <a href={`/`}><img src={require('./icons/rentDuo.png')} alt="" height="90" /></a>
                 { isAuthenticated ? userLinks: guestLinks }
             </div>
           </div>
