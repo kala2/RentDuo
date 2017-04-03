@@ -1,7 +1,7 @@
 import axios from 'axios';
 
-export function searchRequest(userData) {
+export function searchRequest(query) {
   return dispatch => {
-    return axios.post('/api/search', userData);
+    return axios.get('/api/search', query);
   }
 }

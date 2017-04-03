@@ -64,13 +64,13 @@ class LoginForm extends React.Component {
       const { errors, id, password, isLoading } = this.state;
       return (
         <form onSubmit={this.handleSubmit}>
-          <h1>This is a login form</h1>
+          <h1 className="text-center">Login</h1>
 
           { errors.form && <div className="alert alert-danger">{errors.form}</div> }
 
           <TextFieldGroup
             error={errors.id}
-            label="username / email"
+            placeholder="Username / Email"
             onChange={this.handleChange}
             value={id}
             field="id"
@@ -78,7 +78,7 @@ class LoginForm extends React.Component {
 
           <TextFieldGroup
             error={errors.password}
-            label="password"
+            placeholder="password"
             onChange={this.handleChange}
             value={password}
             field="password"
@@ -86,7 +86,7 @@ class LoginForm extends React.Component {
           />
 
           <div className="form-group">
-                <button disabled={isLoading} className="btn btn-primary btn-lg">Login</button>
+                <button disabled={isLoading} className="btn btn-primary btn-md btn-block">Login</button>
           </div>
         </form>
     );

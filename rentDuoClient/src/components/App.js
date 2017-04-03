@@ -13,6 +13,7 @@ class App extends React.Component {
                 `}>
         <div className="container-fluid">
           <NavigationBar />
+          <br/>
           <FlashMessagesList />
           {this.props.children}
         </div>

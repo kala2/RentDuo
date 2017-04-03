@@ -34,7 +34,7 @@ class EventForm extends React.Component {
 
           <TextFieldGroup
             name="title"
-            label="Event Title"
+            placeholder="Event Title"
             field="title"
             value={title}
             onChange={this.handleChange}

@@ -1,5 +1,7 @@
 import React from 'react';
 import TextFieldGroup from '../common/TextFieldGroup';
+import vehicles from '../../data/vehicles';
+import map from 'lodash/map';
 
 class SearchForm extends React.Component {
   constructor(props) {
@@ -38,9 +40,13 @@ class SearchForm extends React.Component {
     }
 
     render() {
+      const options = map(vehicles,(val, key) =>
+          <option value={val} key={val}>{key}</option>
+      );
       return (
-          <form onSubmit={this.handleSubmit}>
+          <form className="form-group" onSubmit={this.handleSubmit}>
             <div className="row">
+            <div className="input-group">
               <div className="col-md-2">
                 <TextFieldGroup
                   onChange={this.handleChange}
@@ -52,17 +58,10 @@ class SearchForm extends React.Component {
               <div className="col-md-2">
                 <TextFieldGroup
                   onChange={this.handleChange}
-                  value={this.state.vehicle}
-                  field="vehicle"
-                  placeholder="Vehicle"
-                />
-              </div>
-              <div className="col-md-2">
-                <TextFieldGroup
-                  onChange={this.handleChange}
                   value={this.state.checkIn}
                   field="checkIn"
                   placeholder="Check In"
+                  type="date"
                 />
               </div>
               <div className="col-md-2">
@@ -71,6 +70,7 @@ class SearchForm extends React.Component {
                   value={this.state.checkOut}
                   field="checkOut"
                   placeholder="Check Out"
+                  type="date"
                 />
               </div>
               <div className="col-md-2">
@@ -79,11 +79,24 @@ class SearchForm extends React.Component {
                   value={this.state.travelers}
                   field="travelers"
                   placeholder="Travelers"
+                  type="number"
+                  min="1"
                 />
               </div>
+              <div className="col-md-2">
+                <select
+                  onChange={this.handleChange}
+                  value={this.state.vehicles}
+                  className="form-control"
+                >
+                {options}
+                </select>
+              </div>
+              <div className="col-md-2">
+                <button disabled={this.state.isLoading} className="btn btn-primary btn-md btn-block">Search</button>
+              </div>
             </div>
-            <button disabled={this.state.isLoading} className="btn btn-primary btn-md">Search
-              </button>
+            </div>
         </form>
     );
   }

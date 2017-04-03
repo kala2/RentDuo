@@ -36,7 +36,7 @@ function validateInput(data) {
   }
 }
 
-class SignupForm extends React.Component {
+class ProfileForm extends React.Component {
   constructor(props) {
       super(props);
       this.state = {
@@ -52,6 +52,7 @@ class SignupForm extends React.Component {
       this.handleChange = this.handleChange.bind(this);
       this.handleSubmit = this.handleSubmit.bind(this);
       this.checkUserExists = this.checkUserExists.bind(this);
+      this.getUserDetails = this.getUserDetails.bind(this);
     }
 
     handleChange(event) {
@@ -63,7 +64,7 @@ class SignupForm extends React.Component {
       const value = event.target.value;
 
       if (value !== '' ) {
-        this.props.isUserExists(value).then(res => {
+        this.props.profileUpdateRequest(value).then(res => {
             let errors = this.state.errors;
             let invalid;
             if (res.data.user) {
@@ -76,6 +77,23 @@ class SignupForm extends React.Component {
             this.setState({ errors, invalid });
         });
       }
+    }
+
+    getUserDetails(event) {
+        const field = event.target.name;
+        const value = event.target.value;
+        this.props.getUser(value).then(res => {
+            let errors = this.state.errors;
+            let invalid;
+            if (res.data.user) {
+               errors[field] = 'there is user with this ' + field;
+               invalid = true;
+            } else {
+              errors[field] = '';
+              invalid = false;
+            }
+            this.setState({ errors, invalid });
+        });
     }
 
     isValid() {
@@ -91,13 +109,13 @@ class SignupForm extends React.Component {
       event.preventDefault();
       if (this.isValid()) {
         this.setState({ errors: {} , isLoading: true });
-        this.props.userSignupRequest(this.state).then(
+        this.props.profileUpdateRequest(this.state).then(
           () => {
             this.props.addFlashMessage({
               type: 'success',
-              text: 'You have signed Up successfully.'
+              text: 'You have Updated successfully.'
             });
-            this.context.router.push('/');
+            this.context.router.push('/profile');
           },
           (err) => this.setState({ errors: err.response.data, isLoading: false  })
         );
@@ -108,7 +126,7 @@ class SignupForm extends React.Component {
       const { errors } = this.state;
       return (
         <form onSubmit={this.handleSubmit}>
-          <h1 className="text-center">User Registration</h1>
+          <h1 className="text-center">Profile Update</h1>
 
           <TextFieldGroup
             error={errors.username}
@@ -140,7 +158,6 @@ class SignupForm extends React.Component {
             value={this.state.passwordConfirmation}
             field="passwordConfirmation"
           />
-
           <div className="form-group">
                 <button disabled={this.state.isLoading || this.state.invalid} className="btn btn-primary btn-md btn-block">Sign up
                 </button>
@@ -150,14 +167,14 @@ class SignupForm extends React.Component {
   }
 }
 
-SignupForm.propTypes = {
-  userSignupRequest: React.PropTypes.func.isRequired,
+ProfileForm.propTypes = {
+  profileUpdateRequest: React.PropTypes.func.isRequired,
   addFlashMessage: React.PropTypes.func.isRequired,
-  isUserExists: React.PropTypes.func.isRequired
+  getUser: React.PropTypes.func.isRequired
 }
 
-SignupForm.contextTypes = {
+ProfileForm.contextTypes = {
   router: React.PropTypes.object.isRequired
 }
 
-export default SignupForm;
+export default ProfileForm;
