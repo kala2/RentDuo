@@ -6,8 +6,11 @@ export function profileUpdateRequest(userData) {
   }
 }
 
-export function getUser(id) {
+export function getUser() {
   return dispatch => {
-    return axios.get(`/api/users/${id}`);
+    return axios.get('/api/user').then(res => dispatch({
+      type: 'FETCH_PROFILE',
+      data: res.data
+    }));
   }
 }

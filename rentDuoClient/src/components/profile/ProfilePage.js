@@ -5,6 +5,21 @@ import { profileUpdateRequest, getUser } from '../../actions/profileUpdateAction
 import { addFlashMessage } from '../../actions/flashMessages';
 
 class ProfilePage extends React.Component {
+
+    componentDidMount() {
+      this.props.getUser();
+    }
+
+    renderUser({email, username}){
+      return (
+        <div className="row">
+          <div className="col-md-4 col-md-offset-4">
+              {email} {username}
+          </div>
+        </div>
+      );
+    }
+
     render() {
       const { profileUpdateRequest, addFlashMessage, getUser } = this.props;
       return (

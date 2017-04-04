@@ -31,30 +31,30 @@ function validateInput(data, otherValidations) {
   })
 }
 
-router.post('/', (req, res) => {
-  validateInput(req.body, commonValidations).then(({ errors, isValid}) => {
-    if(isValid) {
-      const { username, email, password } = req.body;
-      const password_digest = bcrypt.hashSync(password, 10);
+router.get('/', (req, res) => {
+  const authorizationHeader = req.headers['authorization'];
+  let token;
 
-      User.forge({
-        username, email, password_digest
-      }, { hasTimestamps: true }).save()
-        .then( user => res.json({ success: true }))
-        .catch( err => res.status(500).json({ error: err }));
+  if (authorizationHeader) {
+    token = authorizationHeader.split(' ')[1];
+  }
+  jwt.verify(token, config.jwtSecret, (err, decoded) => {
+    if (err) {
+      res.status(401).json({
+        error: 'Failed to authenticate'
+      });
     } else {
-      res.status(400).json(errors);
+      User.query({
+        where: { id: decoded.id },
+        select: [ 'email', 'id', 'username' ]
+      }).fetch().then(user => {
+        if (!user) {
+          res.status(404).json({ error: 'No such user' });
+        } else {
+          res.json({ user });
+        }
+      });
     }
-  });
-});
-
-router.get('/:id', (req, res) => {
-  User.query({
-    select: [ 'username', 'email' ],
-    where: ({ email: req.params.id }),
-    orWhere: { username: req.params.id }
-  }).fetch().then(user => {
-      res.json({ user });
   });
 });
 
