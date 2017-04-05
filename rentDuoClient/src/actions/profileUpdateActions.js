@@ -1,4 +1,5 @@
 import axios from 'axios';
+export const SET_USER = 'SET_USER';
 
 export function profileUpdateRequest(userData) {
   return dispatch => {
@@ -6,11 +7,17 @@ export function profileUpdateRequest(userData) {
   }
 }
 
+export function setUser(user) {
+  return {
+    type: SET_USER,
+    user
+  }
+}
+
 export function getUser() {
   return dispatch => {
-    return axios.get('/api/user').then(res => dispatch({
-      type: 'FETCH_PROFILE',
-      data: res.data
-    }));
+    return axios.get('/api/user')
+    .then(res => res.data)
+    .then(data => dispatch(setUser(data.user)));
   }
 }

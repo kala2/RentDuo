@@ -3,6 +3,8 @@ import ProfileForm from './ProfileForm';
 import { connect } from 'react-redux';
 import { profileUpdateRequest, getUser } from '../../actions/profileUpdateActions';
 import { addFlashMessage } from '../../actions/flashMessages';
+import UserProfile from './UserProfile';
+
 
 class ProfilePage extends React.Component {
 
@@ -10,21 +12,14 @@ class ProfilePage extends React.Component {
       this.props.getUser();
     }
 
-    renderUser({email, username}){
-      return (
-        <div className="row">
-          <div className="col-md-4 col-md-offset-4">
-              {email} {username}
-          </div>
-        </div>
-      );
-    }
-
     render() {
       const { profileUpdateRequest, addFlashMessage, getUser } = this.props;
       return (
         <div className="row">
           <div className="col-md-4 col-md-offset-4">
+              <div className="row text-center">
+                <UserProfile user={this.props.user} />
+              </div>
               <ProfileForm
                 profileUpdateRequest={profileUpdateRequest}
                 addFlashMessage={addFlashMessage}
@@ -42,4 +37,10 @@ ProfilePage.propTypes = {
   getUser: React.PropTypes.func.isRequired
 }
 
-export default connect(null, { profileUpdateRequest, addFlashMessage, getUser })(ProfilePage);
+function mapStateToProps(state) {
+  return {
+    user: state.user
+  }
+}
+
+export default connect(mapStateToProps, { profileUpdateRequest, addFlashMessage, getUser })(ProfilePage);

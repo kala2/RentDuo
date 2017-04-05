@@ -29,10 +29,6 @@ class SearchForm extends React.Component {
         console.log(this.state);
         this.props.searchRequest(this.state).then(
           () => {
-            this.props.addFlashMessage({
-              type: 'success',
-              text: 'You have signed Up successfully.'
-            });
             this.context.router.push('/');
           },
           (err) => this.setState({ errors: err.response.data, isLoading: false  })
