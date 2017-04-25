@@ -99,8 +99,7 @@ class SearchForm extends React.Component {
 }
 
 SearchForm.propTypes = {
-  searchRequest: React.PropTypes.func.isRequired,
-  addFlashMessage: React.PropTypes.func.isRequired
+  searchRequest: React.PropTypes.func.isRequired
 }
 
 export default SearchForm;

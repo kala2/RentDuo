@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import { logout } from '../actions/authActions';
 
 class NavigationBar extends React.Component {
+
     logout(event) {
       event.preventDefault();
       this.props.logout();

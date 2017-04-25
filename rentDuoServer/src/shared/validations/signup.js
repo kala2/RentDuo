@@ -8,6 +8,14 @@ export default function validateInput(data) {
     errors.username = 'Username is required';
   }
 
+  if (Validator.isEmpty﻿(data.firstname)) {
+    errors.firstname = 'First Name is required';
+  }
+
+  if (Validator.isEmpty﻿(data.lastname)) {
+    errors.lastname = 'Last Name is required';
+  }
+
   if (Validator.isEmpty﻿(data.email)) {
     errors.email = 'Email is required';
   }

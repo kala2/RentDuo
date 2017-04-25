@@ -14,6 +14,12 @@ export function setUser(user) {
   }
 }
 
+export function isUserExists(id) {
+  return dispatch => {
+    return axios.get(`/api/users/${id}`);
+  }
+}
+
 export function getUser() {
   return dispatch => {
     return axios.get('/api/user')

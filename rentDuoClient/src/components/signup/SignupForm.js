@@ -14,6 +14,14 @@ function validateInput(data) {
     errors.email = 'Email is required';
   }
 
+  if (Validator.isEmpty﻿(data.firstname)) {
+    errors.firstname = 'First Name is required';
+  }
+
+  if (Validator.isEmpty﻿(data.lastname)) {
+    errors.lastname = 'Last Name is required';
+  }
+
   if (!Validator.isEmail(data.email)) {
     errors.email = 'Email is incorrect';
   }
@@ -42,6 +50,8 @@ class SignupForm extends React.Component {
       this.state = {
         username: '',
         email: '',
+        firstname: '',
+        lastname: '',
         password: '',
         passwordConfirmation: '',
         errors: {},
@@ -109,7 +119,20 @@ class SignupForm extends React.Component {
       return (
         <form onSubmit={this.handleSubmit}>
           <h1 className="text-center">User Registration</h1>
-
+            <TextFieldGroup
+              error={errors.firstname}
+              placeholder="First Name"
+              onChange={this.handleChange}
+              value={this.state.firstname}
+              field="firstname"
+            />
+            <TextFieldGroup
+              error={errors.lastname}
+              placeholder="Last Name"
+              onChange={this.handleChange}
+              value={this.state.lastname}
+              field="lastname"
+            />
           <TextFieldGroup
             error={errors.username}
             placeholder="Username"

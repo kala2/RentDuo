@@ -34,11 +34,11 @@ function validateInput(data, otherValidations) {
 router.post('/', (req, res) => {
   validateInput(req.body, commonValidations).then(({ errors, isValid}) => {
     if(isValid) {
-      const { username, email, password } = req.body;
+      const { username, email, password, firstname, lastname } = req.body;
       const password_digest = bcrypt.hashSync(password, 10);
 
       User.forge({
-        username, email, password_digest
+        username, email, firstname, lastname, password_digest
       }, { hasTimestamps: true }).save()
         .then( user => res.json({ success: true }))
         .catch( err => res.status(500).json({ error: err }));

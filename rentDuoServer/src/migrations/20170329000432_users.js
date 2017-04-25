@@ -4,6 +4,8 @@ exports.up = function(knex, Promise) {
     table.increments();
     table.string('username').notNullable().unique();
     table.string('email').notNullable().unique();
+    table.string('firstname').notNullable();
+    table.string('lastname').notNullable();
     table.string('password_digest').notNullable();
     table.timestamps();
   });

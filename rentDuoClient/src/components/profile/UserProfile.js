@@ -4,7 +4,7 @@ export default function UserProfile({ user }) {
 
   const userProfile = (
     <div className="row">
-      {user.username} {user.email}
+      <h1 className="text-center">Profile {user.username} - {user.email}</h1>
     </div>
   );
 
