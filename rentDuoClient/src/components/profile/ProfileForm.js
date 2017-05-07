@@ -6,6 +6,14 @@ import isEmpty from 'lodash/isEmpty';
 function validateInput(data) {
   let errors ={};
 
+  if (Validator.isEmpty﻿(data.firstname)) {
+    errors.firstname = 'First Name is required';
+  }
+
+  if (Validator.isEmpty﻿(data.lastname)) {
+    errors.lastname = 'Last Name is required';
+  }
+
   if (Validator.isEmpty﻿(data.password)) {
     errors.password = 'Password is required';
   }
