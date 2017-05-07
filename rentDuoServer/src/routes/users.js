@@ -1,5 +1,5 @@
 import express from 'express';
-import commonValidations from '../shared/validations/signup';
+import commonValidations from '../shared/validations/update';
 import bcrypt from 'bcrypt';
 import User from '../models/user';
 import isEmpty from 'lodash/isEmpty';
@@ -31,17 +31,12 @@ function validateInput(data, otherValidations) {
   })
 }
 
-router.post('/', (req, res) => {
+router.put('/:id', (req, res) => {
   validateInput(req.body, commonValidations).then(({ errors, isValid}) => {
     if(isValid) {
       const { username, email, password, firstname, lastname } = req.body;
       const password_digest = bcrypt.hashSync(password, 10);
-
-      User.forge({
-        username, email, firstname, lastname, password_digest
-      }, { hasTimestamps: true }).save()
-        .then( user => res.json({ success: true }))
-        .catch( err => res.status(500).json({ error: err }));
+      console.log(req.body);
     } else {
       res.status(400).json(errors);
     }
@@ -50,7 +45,7 @@ router.post('/', (req, res) => {
 
 router.get('/:id', (req, res) => {
   User.query({
-    select: [ 'username', 'email' ],
+    select: [ 'username', 'email', 'firstname', 'lastname' ],
     where: ({ email: req.params.id }),
     orWhere: { username: req.params.id }
   }).fetch().then(user => {

@@ -3,8 +3,6 @@ import ProfileForm from './ProfileForm';
 import { connect } from 'react-redux';
 import { profileUpdateRequest, getUser, isUserExists } from '../../actions/profileUpdateActions';
 import { addFlashMessage } from '../../actions/flashMessages';
-import UserProfile from './UserProfile';
-
 
 class ProfilePage extends React.Component {
 

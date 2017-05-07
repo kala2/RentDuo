@@ -31,7 +31,7 @@ router.post('/', (req, res) => {
 
 router.get('/:id', (req, res) => {
   User.query({
-    select: [ 'username', 'email' ],
+    select: [ 'username', 'email', 'firstname', 'lastname' ],
     where: ({ email: req.params.id }),
     orWhere: { username: req.params.id }
   }).fetch().then(user => {

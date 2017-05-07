@@ -1,9 +1,9 @@
 import axios from 'axios';
 export const SET_USER = 'SET_USER';
 
-export function profileUpdateRequest(userData) {
+export function profileUpdateRequest(userData, id) {
   return dispatch => {
-    return axios.put('/api/users', userData);
+    return axios.put(`/api/users/${id}`, userData);
   }
 }
 

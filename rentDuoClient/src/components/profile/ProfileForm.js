@@ -6,18 +6,6 @@ import isEmpty from 'lodash/isEmpty';
 function validateInput(data) {
   let errors ={};
 
-  if (Validator.isEmpty﻿(data.username)) {
-    errors.username = 'Username is required';
-  }
-
-  if (Validator.isEmpty﻿(data.email)) {
-    errors.email = 'Email is required';
-  }
-
-  if (!Validator.isEmail(data.email)) {
-    errors.email = 'Email is incorrect';
-  }
-
   if (Validator.isEmpty﻿(data.password)) {
     errors.password = 'Password is required';
   }
@@ -93,7 +81,8 @@ class ProfileForm extends React.Component {
       event.preventDefault();
       if (this.isValid()) {
         this.setState({ errors: {} , isLoading: true });
-        this.props.profileUpdateRequest(this.state).then(
+        const value = this.props.user.id;
+        this.props.profileUpdateRequest(this.state, value).then(
           () => {
             this.props.addFlashMessage({
               type: 'success',
@@ -114,58 +103,54 @@ class ProfileForm extends React.Component {
           <div className="row">
             <div className="col-md-4 col-sm-6 col-xs-12">
               <div className="text-center">
-                <img src="http://lorempixel.com/200/200/people/9/" className="avatar img-circle img-thumbnail" alt="avatar" />
+                <img src="https://www.kontena.io/images/default-user-image.png" className="avatar img-circle img-thumbnail" alt="avatar" />
                 <h6>Upload a different photo...</h6>
                 <input type="file" className="text-center center-block well well-sm" />
               </div>
             </div>
             <div className="col-md-8 col-sm-6 col-xs-12 personal-info">
-              <div className="alert alert-info alert-dismissable">
-                <a className="panel-close close" data-dismiss="alert">×</a>
-                <i className="fa fa-coffee"></i>
-                This is an <strong>.alert</strong>. Use this to show important messages to the user.
-              </div>
-              <h3>Personal info</h3>
+              {
+                // <div className="alert alert-info alert-dismissable">
+                //   <a className="panel-close close" data-dismiss="alert">×</a>
+                //   <i className="fa fa-coffee"></i>
+                //   This is an <strong>.alert</strong>. Use this to show important messages to the user.
+                // </div>
+              }
+              <h3>Personal info<hr/></h3>
               <form onSubmit={this.handleSubmit}>
                 <div className="form-group">
-                  <label className="col-lg-3 control-label">First name:</label>
-                  <div className="col-lg-8">
+                    <span className="label label-primary">{this.props.user.firstname}</span>
                     <TextFieldGroup
                       error={errors.firstname}
-                      placeholder="Username"
+                      placeholder="Firstname"
                       onChange={this.handleChange}
-                      value={this.props.user.firstname}
-                      field="username"
+                      value={this.state.firstname}
+                      field="firstname"
                     />
-                  </div>
                 </div>
                 <div className="form-group">
-                  <label className="col-lg-3 control-label">Last name:</label>
-                  <div className="col-lg-8">
+                  <span className="label label-primary">{this.props.user.lastname}</span>
                     <TextFieldGroup
                       error={errors.lastname}
-                      placeholder="Username"
+                      placeholder="Lastname"
                       onChange={this.handleChange}
-                      value={this.props.user.lastname}
-                      field="username"
+                      value={this.state.lastname}
+                      field="lastname"
                     />
-                  </div>
                 </div>
                 <div className="form-group">
-                  <label className="col-md-3 control-label">Username:</label>
-                  <div className="col-md-8">
+                  <span className="label label-primary">{this.props.user.username}</span>
                     <TextFieldGroup
                       error={errors.username}
                       placeholder="Username"
                       onChange={this.handleChange}
                       value={this.props.user.username}
                       field="username"
+                      disabled
                     />
-                  </div>
                 </div>
                 <div className="form-group">
-                  <label className="col-lg-3 control-label">Email:</label>
-                  <div className="col-lg-8">
+                  <span className="label label-primary">Email</span>
                     <TextFieldGroup
                       error={errors.email}
                       placeholder="Email"
@@ -175,11 +160,9 @@ class ProfileForm extends React.Component {
                       field="email"
                       disabled
                     />
-                  </div>
                 </div>
                 <div className="form-group">
-                  <label className="col-md-3 control-label">Password:</label>
-                  <div className="col-md-8">
+                  <span className="label label-primary">{this.props.user.password}</span>
                     <TextFieldGroup
                       error={errors.password}
                       placeholder="Password"
@@ -187,11 +170,8 @@ class ProfileForm extends React.Component {
                       value={this.props.user.password}
                       field="password"
                     />
-                  </div>
                 </div>
                 <div className="form-group">
-                  <label className="col-md-3 control-label">Confirm password:</label>
-                  <div className="col-md-8">
                     <TextFieldGroup
                       error={errors.passwordConfirmation}
                       placeholder="Password Confirmation"
@@ -199,7 +179,6 @@ class ProfileForm extends React.Component {
                       value={this.state.passwordConfirmation}
                       field="passwordConfirmation"
                     />
-                  </div>
                 </div>
                 <div className="form-group">
                   <label className="col-md-3 control-label"></label>

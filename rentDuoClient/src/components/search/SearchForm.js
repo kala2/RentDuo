@@ -84,8 +84,7 @@ class SearchForm extends React.Component {
                   onChange={this.handleChange}
                   value={this.state.vehicles}
                   className="form-control"
-                >
-                {options}
+                >{options}
                 </select>
               </div>
               <div className="col-md-2">
