@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Component } from 'react';
 import Paper from 'material-ui/Paper';
 import LoginForm from '../components/LoginForm';
 
@@ -9,14 +9,18 @@ const styles = {
   }
 };
 
-export default class Login extends React.Component {
+export default class Login extends Component {
+
+  checkAuthentication = (dataFromChild) => {
+    console.log("the login.js dataFromChild", dataFromChild);
+    this.props.checkAuthentication(true);
+  }
 
   render() {
-    console.log("the login.js props are: ", this.props.isAuthenticated);
     return (
       <Paper style={styles.paper}>
         <h2>Login</h2>
-        <LoginForm isAuthenticated={this.props.isAuthenticated} />
+        <LoginForm isAuthenticated={this.props.isAuthenticated} checkAuthentication={this.checkAuthentication} />
       </Paper>
     );
   }

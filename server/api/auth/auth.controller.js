@@ -2,7 +2,6 @@ const {users} = require('../../config');
 const generateToken = require('./generateToken');
 
 function authenticate(req, res, next) {
-  console.log('HERE');
   const username = req.body.username;
   const password = req.body.password;
 

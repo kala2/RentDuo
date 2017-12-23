@@ -1,16 +1,17 @@
-import React from 'react';
+import React, { Component } from 'react';
 import TextField from 'material-ui/TextField';
 import RaisedButton from 'material-ui/RaisedButton';
-import superagent from 'superagent';
 import { Redirect } from 'react-router';
+import * as utils from './Utilities.js';
 
-export default class LoginForm extends React.Component {
+export default class LoginForm extends Component {
 
   constructor() {
       super();
       this.state = {
         content: {},
-        message: ''
+        message: '',
+        isAuthenticated: ''
       }
   }
 
@@ -23,24 +24,15 @@ export default class LoginForm extends React.Component {
 
   handleSubmit(event) {
     event.preventDefault();
-    superagent
-        .post('/auth/v1')
-        .send({
-            username: this.state.content.username,
-            password: this.state.content.password
-        })
-        .end((err, res) => {
-            if (err) {
-                this.setState({ message: "Authentication Failed" });
-            } else {
-                localStorage.setItem('token', res.body.token);
-                this.setState({ message: "Authentication Successfull" });
-            }
-        })
+    utils.postLogin(this.state.content).then((result) => {
+        if(result.status === 201) {
+            localStorage.setItem('token', result.body.token);
+            this.props.checkAuthentication(true);
+        }
+    });
   }
 
   render() {
-        console.log("the props loginForm.js is: ", this.props.isAuthenticated);
         return (
             <div>
                 {this.props.isAuthenticated ? <Redirect to={{pathname: '/app'}} /> : (
