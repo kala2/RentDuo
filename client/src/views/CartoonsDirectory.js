@@ -4,7 +4,7 @@ import { Redirect } from 'react-router';
 
 const styles = {
   paper: {
-    minHeight: '100px',
+    minHeight: '100%',
     padding: '40px'
   }
 };
@@ -20,7 +20,7 @@ export default class CartoonsDirectory extends Component {
 
   render() {
     return (
-      <div>
+      <div className="cartoon-directory">
         {!this.props.isAuthenticated ? <Redirect to={{pathname: '/'}} /> : (
           <Paper style={styles.paper}>
             <h2>This is Cartoons Directory</h2>

@@ -4,6 +4,7 @@ import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import { Row, Col } from 'react-flexbox-grid';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
 import Login from './views/Login.js';
+import Home from './views/Home.js';
 import CartoonsDirectory from './views/CartoonsDirectory.js';
 import injectTapEventPlugin from 'react-tap-event-plugin';
 
@@ -36,9 +37,10 @@ class App extends Component {
           <MuiThemeProvider>
             <Router>
               <Row around='xs'>
-                <Col xs={12} md={11}>
+                <Col xs={12} md={12}>
                   <Route exact path="/" component={() => (<Login isAuthenticated={this.state.isAuthenticated} checkAuthentication={this.checkAuthentication} />)} />
-                  <Route exact path="/app" component={() => (<CartoonsDirectory isAuthenticated={this.state.isAuthenticated} />)} />
+                  <Route exact path="/home" component={() => (<Home isAuthenticated={this.state.isAuthenticated} checkAuthentication={this.checkAuthentication} />)} />
+                  {/* <Route exact path="/app" component={() => (<CartoonsDirectory isAuthenticated={this.state.isAuthenticated} />)} /> */}
                 </Col>
               </Row>
             </Router>

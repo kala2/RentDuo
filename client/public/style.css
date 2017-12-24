@@ -1,0 +1,21 @@
+#stickyFooter {
+  height: 100%;
+}
+
+.forSticky {
+  min-height: calc(100vh - 70px);
+}
+
+.row {
+  margin-bottom: 0px !important;
+}
+
+.navBar {
+  background-color: #ee6e73 !important;
+}
+
+/* .navBar h1 {
+  color: black !important;
+} */
+
+

@@ -35,7 +35,7 @@ export default class LoginForm extends Component {
   render() {
         return (
             <div>
-                {this.props.isAuthenticated ? <Redirect to={{pathname: '/app'}} /> : (
+                {this.props.isAuthenticated ? <Redirect to={{pathname: '/home'}} /> : (
                        <div>
                             <h2>This is a login form</h2>
                             {/* {!(this.state.message === '') ? <div>{this.state.message}</div> : null} */}
