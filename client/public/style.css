@@ -11,11 +11,28 @@
 }
 
 .navBar {
-  background-color: #ee6e73 !important;
+  background-color: transparent !important;
 }
 
 /* .navBar h1 {
   color: black !important;
 } */
 
+.noMarginTop {
+  margin-top: 0px;
+}
+
+.logoImg {
+  width: 150px;
+  height: auto;
+  float: left;
+}
+
+.NavBtnRight {
+  margin-top: 8px;
+}
+
+/* input[type=range] + .thumb.active .value {
+  margin-top: 64px !important;
+} */
 

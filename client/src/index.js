@@ -5,7 +5,8 @@ import { Row, Col } from 'react-flexbox-grid';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
 import Login from './views/Login.js';
 import Home from './views/Home.js';
-import CartoonsDirectory from './views/CartoonsDirectory.js';
+import Footer from './views/Footer.js';
+// import CartoonsDirectory from './views/CartoonsDirectory.js';
 import injectTapEventPlugin from 'react-tap-event-plugin';
 
 injectTapEventPlugin();
@@ -45,6 +46,8 @@ class App extends Component {
               </Row>
             </Router>
           </MuiThemeProvider>
+          <Footer />
+         
       </div>
     
     );
