@@ -59,10 +59,10 @@ export default class NavBar extends Component {
   render() {
     return (
         <AppBar className="navBar"
-            iconElementLeft={<img className="logoImg" src="../../images/logo.png" alt="logo"></img>}
+            iconElementLeft={<img className="logoImg" src="../../images/logoResized.png" alt="logo"></img>}
             iconElementRight={
                 this.props.isAuthenticated ? 
-                <div className="row"><div className="NavBtnRight"><Demo /> <Demo /> </div><Logged /></div> : (<div><Login /><Login /><Login /></div>)}
+                <div className="row marginTop"><div className="NavBtnRight"><Demo /> <Demo /> </div><Logged /></div> : (<div><Login /><Login /><Login /></div>)}
         />
     );
   }

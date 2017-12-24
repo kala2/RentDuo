@@ -11,15 +11,25 @@
 }
 
 .navBar {
-  background-color: transparent !important;
+  background-color: #737373 !important;
+  box-shadow: none !important;
+  height: 117px;
+  opacity: 0.9;
 }
 
-/* .navBar h1 {
-  color: black !important;
+/* .stickyContainer {
+  margin-top: 101px;
 } */
+.page-footer {
+  background-color: #737373;
+}
 
 .noMarginTop {
   margin-top: 0px;
+}
+
+.marginTop {
+  margin-top: 24px;
 }
 
 .logoImg {
@@ -31,8 +41,3 @@
 .NavBtnRight {
   margin-top: 8px;
 }
-
-/* input[type=range] + .thumb.active .value {
-  margin-top: 64px !important;
-} */
-
