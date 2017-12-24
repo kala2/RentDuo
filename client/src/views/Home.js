@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import CartoonsDirectory from './CartoonsDirectory.js';
 import NavBar from './NavBar.js';
+import SimpleSlider from './SimpleSlider.js';
 import { StickyContainer, Sticky } from 'react-sticky';
 
 class Home extends Component {
@@ -23,6 +24,7 @@ class Home extends Component {
                     }
                   }
                 </Sticky>
+                <SimpleSlider />
                     <CartoonsDirectory isAuthenticated={this.props.isAuthenticated} />
                     <CartoonsDirectory isAuthenticated={this.props.isAuthenticated} />
                     <CartoonsDirectory isAuthenticated={this.props.isAuthenticated} />

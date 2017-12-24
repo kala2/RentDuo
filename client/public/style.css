@@ -42,3 +42,7 @@
 .NavBtnRight {
   margin-top: 8px;
 }
+
+.slick-initialized.slick-slider {
+  height: 600px;
+}
