@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import CartoonsDirectory from './CartoonsDirectory.js';
 import NavBar from './NavBar.js';
 import SimpleSlider from './SimpleSlider.js';
+import TextField from 'material-ui/TextField';
 import { StickyContainer, Sticky } from 'react-sticky';
 
 class Home extends Component {
@@ -24,7 +25,20 @@ class Home extends Component {
                     }
                   }
                 </Sticky>
-                <SimpleSlider />
+                
+
+                <div id="container">
+                  <div id="navi">
+                    <SimpleSlider /></div>
+                    <div id="infoi">
+                      <div className="row searchBarRow">
+                        <div id="infoi2">
+                            <TextField hintText="Hint Text"  />&emsp;
+                            <TextField hintText="Hint Text"  />
+                        </div>
+                    </div>
+                  </div>
+                </div>
                     <CartoonsDirectory isAuthenticated={this.props.isAuthenticated} />
                     <CartoonsDirectory isAuthenticated={this.props.isAuthenticated} />
                     <CartoonsDirectory isAuthenticated={this.props.isAuthenticated} />

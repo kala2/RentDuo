@@ -46,3 +46,95 @@
 .slick-initialized.slick-slider {
   height: 600px;
 }
+
+.slick-next {
+  right: 10px !important;
+  z-index: 9999;
+}
+
+.slick-prev {
+  left: 10px !important;
+  z-index: 9999;
+}
+
+#container {
+  width: 100%;
+  height: 600px;
+  position: relative;
+}
+#navi,
+#infoi {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+#infoi {
+  z-index: 10;
+}
+
+.searchBarRow {
+  transform: translate(0%, 550%);
+}
+
+.row #infoi2 {
+  display: table !important;
+  margin: 0 auto;
+}
+
+input[type=text]:not(.browser-default):focus:not([readonly]) {
+  border-bottom: none !important;
+  -webkit-box-shadow: none !important;
+  box-shadow: none !important;
+}
+
+.slider1 {
+  background-image: url("./images/pexels1.png") !important;
+  width: 100% !important;
+  height: 600px !important;
+  background-size: cover;
+}
+
+.slider2 {
+  background-image: url("./images/pexels2.jpg") !important;
+  width: 100% !important;
+  height: 600px !important;
+  background-size: cover;
+}
+
+@media only screen and (min-width: 1280px) {
+  .slider2 {
+    background-position: 0px -180px;
+  }
+
+  .slider4 {
+    background-position: 0px -180px;
+  }
+
+  .slider5 {
+    background-position: 0px -180px;
+  }
+  
+}
+
+.slider3 {
+  background-image: url("./images/pexels3.png") !important;
+  width: 100% !important;
+  height: 600px !important;
+  background-size: cover;
+}
+
+.slider4 {
+  background-image: url("./images/pexels4.png") !important;
+  width: 100% !important;
+  height: 600px !important;
+  background-size: cover;
+}
+
+.slider5 {
+  background-image: url("./images/pexels5.png") !important;
+  width: 100% !important;
+  height: 600px !important;
+  background-size: cover;
+}
