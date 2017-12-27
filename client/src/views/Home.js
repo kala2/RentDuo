@@ -4,9 +4,10 @@ import NavBar from './NavBar.js';
 import SimpleSlider from './SimpleSlider.js';
 import TextField from 'material-ui/TextField';
 import { StickyContainer, Sticky } from 'react-sticky';
-
+  
 class Home extends Component {
-
+ 
+  
   render() {
     return (
       <div>     
@@ -25,16 +26,23 @@ class Home extends Component {
                     }
                   }
                 </Sticky>
-                
-
                 <div id="container">
                   <div id="navi">
                     <SimpleSlider /></div>
                     <div id="infoi">
                       <div className="row searchBarRow">
                         <div id="infoi2">
-                            <TextField hintText="Hint Text"  />&emsp;
-                            <TextField hintText="Hint Text"  />
+                            <TextField
+      hintText="Hint Text"
+      hintStyle={{color: "#e4e4e4"}}
+      floatingLabelText="Floating Label Text"
+    />&emsp;
+
+<TextField
+      hintText="Hint Text"
+      hintStyle={{color: "#e4e4e4"}}
+      floatingLabelText="Floating Label Text"
+    />&emsp;
                         </div>
                     </div>
                   </div>
@@ -46,7 +54,8 @@ class Home extends Component {
                     <CartoonsDirectory isAuthenticated={this.props.isAuthenticated} />
                     <CartoonsDirectory isAuthenticated={this.props.isAuthenticated} />
                     <CartoonsDirectory isAuthenticated={this.props.isAuthenticated} />
-                    <CartoonsDirectory isAuthenticated={this.props.isAuthenticated} />
+                       <CartoonsDirectory isAuthenticated={this.props.isAuthenticated} />
+               
                
             </StickyContainer>
          </div>

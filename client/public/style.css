@@ -75,7 +75,7 @@
 }
 
 .searchBarRow {
-  transform: translate(0%, 550%);
+  transform: translate(0%, 330%);
 }
 
 .row #infoi2 {
@@ -137,4 +137,12 @@ input[type=text]:not(.browser-default):focus:not([readonly]) {
   width: 100% !important;
   height: 600px !important;
   background-size: cover;
+}
+
+#infoi2 input {
+  color: white !important;
+}
+
+#infoi2 label {
+  color: rgb(0, 188, 212) !important;
 }
