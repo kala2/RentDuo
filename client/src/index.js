@@ -8,6 +8,7 @@ import Home from './views/Home.js';
 import Footer from './views/Footer.js';
 // import CartoonsDirectory from './views/CartoonsDirectory.js';
 import injectTapEventPlugin from 'react-tap-event-plugin';
+import TransitionGroup from 'react-addons-transition-group';
 
 injectTapEventPlugin();
 

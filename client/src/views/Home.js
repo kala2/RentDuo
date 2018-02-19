@@ -4,6 +4,8 @@ import NavBar from './NavBar.js';
 import SimpleSlider from './SimpleSlider.js';
 import TextField from 'material-ui/TextField';
 import { StickyContainer, Sticky } from 'react-sticky';
+import TransitionGroup from 'react-addons-transition-group';
+import { CSSTransitionGroup } from 'react-transition-group';
   
 class Home extends Component {
  
@@ -55,7 +57,16 @@ class Home extends Component {
                     <CartoonsDirectory isAuthenticated={this.props.isAuthenticated} />
                     <CartoonsDirectory isAuthenticated={this.props.isAuthenticated} />
                        <CartoonsDirectory isAuthenticated={this.props.isAuthenticated} />
-               
+               <CSSTransitionGroup
+
+               className="example"
+      transitionName="example"
+      transitionAppear={true}
+      transitionAppearTimeout={500}
+      transitionEnter={false}
+      transitionLeave={false}>
+      <h1>Fading at Initial Mount</h1>
+    </CSSTransitionGroup>
                
             </StickyContainer>
          </div>
