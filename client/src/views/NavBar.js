@@ -16,12 +16,11 @@ class Login extends Component {
     }
 }
 
-class Demo extends Component {
+class MenuButton extends Component {
     static muiName = 'FlatButton';
-  
     render() {
       return (
-        <FlatButton {...this.props} label="Demo" className="noMarginTop" />
+        <FlatButton {...this.props} label="Register" href={this.props.href} className="noMarginTop" />
       );
     }
 }
@@ -62,7 +61,7 @@ export default class NavBar extends Component {
             iconElementLeft={<img className="logoImg" src="../../images/logoResized.png" alt="logo"></img>}
             iconElementRight={
                 this.props.isAuthenticated ? 
-                <div className="row marginTop"><div className="NavBtnRight"><Demo /> <Demo /> </div><Logged /></div> : (<div><Login /><Login /><Login /></div>)}
+                <div className="row marginTop"><div className="NavBtnRight"><MenuButton href="register" label="Register"/><MenuButton /></div><Logged /></div> : (<div className="row marginTop"><div className="NavBtnRight"><Login /><Login /><Login /></div></div>)}
         />
     );
   }

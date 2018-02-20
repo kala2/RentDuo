@@ -2,133 +2,133 @@ module.exports = function(app, db) {
 
 	/////////////////////////Registrater user/////////////////////////
 	app.post('/registerUser', (req, res) => {
-		//console.log(req.body);
-		var UserManagement = require('user-management');
-		var USERNAME = req.body.username;
-		var PASSWORD = req.body.password;
-		var EXTRAS = {
-			email: req.body.email,
-			company: req.body.company,
-			phonenumber: req.body.phonenumber,
-			faxnumber:req.body.faxnumber,
-			address:req.body.address,
-			zippostalcode:req.body.zippostalcode,
-			city:req.body.city,
-			country:req.body.country,
-			state:req.body.state,
-			vat:req.body.vat,
-			eshop:req.body.eshop,
-			firstname:req.body.firstname,
-			middlename:req.body.middlename,
-			lastname:req.body.lastname,
-			verified: req.body.verified,
-		};
-		var users = new UserManagement();
-		users.load(function(err) {
-			//check if user exists
-			users.userExists(USERNAME, function(err, exists) {
-				if (exists) {
-					//user exists
-					users.close();
-					res.status(409);
-					res.send();
-				} else {
-					//user dosen't exists
-					users.createUser(USERNAME, PASSWORD, EXTRAS, function (err) {
-						//user created
-						const nodemailer = require('nodemailer');
-						const handlebars = require('handlebars');
-						const fs = require('file-system');
+		console.log(req.body);
+		// var UserManagement = require('user-management');
+		// var USERNAME = req.body.username;
+		// var PASSWORD = req.body.password;
+		// var EXTRAS = {
+		// 	email: req.body.email,
+		// 	company: req.body.company,
+		// 	phonenumber: req.body.phonenumber,
+		// 	faxnumber:req.body.faxnumber,
+		// 	address:req.body.address,
+		// 	zippostalcode:req.body.zippostalcode,
+		// 	city:req.body.city,
+		// 	country:req.body.country,
+		// 	state:req.body.state,
+		// 	vat:req.body.vat,
+		// 	eshop:req.body.eshop,
+		// 	firstname:req.body.firstname,
+		// 	middlename:req.body.middlename,
+		// 	lastname:req.body.lastname,
+		// 	verified: req.body.verified,
+		// };
+		// var users = new UserManagement();
+		// users.load(function(err) {
+		// 	//check if user exists
+		// 	users.userExists(USERNAME, function(err, exists) {
+		// 		if (exists) {
+		// 			//user exists
+		// 			users.close();
+		// 			res.status(409);
+		// 			res.send();
+		// 		} else {
+		// 			//user dosen't exists
+		// 			users.createUser(USERNAME, PASSWORD, EXTRAS, function (err) {
+		// 				//user created
+		// 				const nodemailer = require('nodemailer');
+		// 				const handlebars = require('handlebars');
+		// 				const fs = require('file-system');
 						
-						nodemailer.createTestAccount((err, account) => {
-							// var html = require('../style')
-							console.log("The username is: ", USERNAME);
-							var link;
-							var itemId;
-							var validToken;
+		// 				nodemailer.createTestAccount((err, account) => {
+		// 					// var html = require('../style')
+		// 					console.log("The username is: ", USERNAME);
+		// 					var link;
+		// 					var itemId;
+		// 					var validToken;
 				
-							var ObjectID = require('mongodb').ObjectID;
-							const details = { 'username': USERNAME };
-							db.collection('users').findOne(details, (err, item) => {
-								if (err) {
-									console.log(err);
-								} else {
-									console.log("the objectId of the item is: ", item._id);
-									itemId = item._id;
-									console.log("the itemId is: ", itemId);
-									console.log("the item email is: ", item.extras.email);
-									link = "http://" + req.get('host') + "/verify/" + itemId;
+		// 					var ObjectID = require('mongodb').ObjectID;
+		// 					const details = { 'username': USERNAME };
+		// 					db.collection('users').findOne(details, (err, item) => {
+		// 						if (err) {
+		// 							console.log(err);
+		// 						} else {
+		// 							console.log("the objectId of the item is: ", item._id);
+		// 							itemId = item._id;
+		// 							console.log("the itemId is: ", itemId);
+		// 							console.log("the item email is: ", item.extras.email);
+		// 							link = "http://" + req.get('host') + "/verify/" + itemId;
 									
-									var readHTMLFile = function(path, callback) {
-										console.log("THE PATH IS: ", path);
-										fs.readFile(path, {encoding: 'utf-8'}, function (err, html) {
-											if (err) {
-												throw err;
-												callback(err);
-											}
-											else {
-												callback(null, html);
-											}
-										});
-									};
+		// 							var readHTMLFile = function(path, callback) {
+		// 								console.log("THE PATH IS: ", path);
+		// 								fs.readFile(path, {encoding: 'utf-8'}, function (err, html) {
+		// 									if (err) {
+		// 										throw err;
+		// 										callback(err);
+		// 									}
+		// 									else {
+		// 										callback(null, html);
+		// 									}
+		// 								});
+		// 							};
 
-									// create reusable transporter object using the default SMTP transport
-									let transporter = nodemailer.createTransport({
-										host: 'hermes.atc.gr', //HOST
-										port: 465,
-										secure: false,
-										requireTLS: true, 
-										auth: {
-											user: 'testmail@atc.gr', // USERNAME your ATC account
-											pass: '098POI)(*'  // PASSWORD
-										},
-										tls: { 
-											ciphers: 'SSLv3',
-											rejectUnauthorized: false
-										}
-									});
+		// 							// create reusable transporter object using the default SMTP transport
+		// 							let transporter = nodemailer.createTransport({
+		// 								host: 'hermes.atc.gr', //HOST
+		// 								port: 465,
+		// 								secure: false,
+		// 								requireTLS: true, 
+		// 								auth: {
+		// 									user: 'testmail@atc.gr', // USERNAME your ATC account
+		// 									pass: '098POI)(*'  // PASSWORD
+		// 								},
+		// 								tls: { 
+		// 									ciphers: 'SSLv3',
+		// 									rejectUnauthorized: false
+		// 								}
+		// 							});
 									
-									readHTMLFile(__dirname + '/email.html', function(err, html) {
-										var template = handlebars.compile(html);
-										var replacements = {
-											username: USERNAME,
-											linkEmail: link
-									   	};
-										var htmlToSend = template(replacements);
+		// 							readHTMLFile(__dirname + '/email.html', function(err, html) {
+		// 								var template = handlebars.compile(html);
+		// 								var replacements = {
+		// 									username: USERNAME,
+		// 									linkEmail: link
+		// 							   	};
+		// 								var htmlToSend = template(replacements);
 
-										// setup email data with unicode symbols
-										let mailOptions = {
-											from: '"Test User" <testmail@atc.gr>', // sender address
-											to: item.extras.email, // list of receivers
-											subject: 'MyShopNet', // Subject line
-											text: 'MyShopNet', // plain text body
-											html: htmlToSend
-										};
+		// 								// setup email data with unicode symbols
+		// 								let mailOptions = {
+		// 									from: '"Test User" <testmail@atc.gr>', // sender address
+		// 									to: item.extras.email, // list of receivers
+		// 									subject: 'MyShopNet', // Subject line
+		// 									text: 'MyShopNet', // plain text body
+		// 									html: htmlToSend
+		// 								};
 														
-										// send mail with defined transport object
-										transporter.sendMail(mailOptions, (error, info) => {
-											if (error) {
-												return console.log(error);
-											}
-											console.log('Message sent: %s', info.messageId);
-											// Preview only available when sending through an Ethereal account
-											console.log('Preview URL: %s', nodemailer.getTestMessageUrl(info));
+		// 								// send mail with defined transport object
+		// 								transporter.sendMail(mailOptions, (error, info) => {
+		// 									if (error) {
+		// 										return console.log(error);
+		// 									}
+		// 									console.log('Message sent: %s', info.messageId);
+		// 									// Preview only available when sending through an Ethereal account
+		// 									console.log('Preview URL: %s', nodemailer.getTestMessageUrl(info));
 									
-											// Message sent: <b658f8ca-6296-ccf4-8306-87d57a0b4321@blurdybloop.com>
-											// Preview URL: https://ethereal.email/message/WaQKMgKddxQDoou...
-										});
+		// 									// Message sent: <b658f8ca-6296-ccf4-8306-87d57a0b4321@blurdybloop.com>
+		// 									// Preview URL: https://ethereal.email/message/WaQKMgKddxQDoou...
+		// 								});
 										
-										users.close();
-										res.status(202);
-										res.send();
-									});
-								};
-							});
-						});
-					});
-				}
-			});
-		});
+		// 								users.close();
+		// 								res.status(202);
+		// 								res.send();
+		// 							});
+		// 						};
+		// 					});
+		// 				});
+		// 			});
+		// 		}
+		// 	});
+		// });
 	});
 
 	/////////////////////////Login user/////////////////////////

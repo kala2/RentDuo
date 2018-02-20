@@ -56,6 +56,7 @@
     "style-loader": "0.18.2",
     "sw-precache-webpack-plugin": "0.11.3",
     "url-loader": "0.5.9",
+    "user-management": "^1.0.6",
     "webpack": "2.6.1",
     "webpack-dev-server": "2.5.0",
     "webpack-manifest-plugin": "1.1.0",
@@ -63,7 +64,7 @@
   },
   "scripts": {
     "serve": "node scripts/start.js",
-    "start": "NODE_ENV=development node server/bin/www",
+    "start": "NODE_ENV=development nodemon server/bin/server.js",
     "build": "./node_modules/.bin/bower install && node scripts/build.js",
     "ui-test": "node scripts/test.js --env=jsdom",
     "test": "./node_modules/.bin/mocha 'server/**/*.spec.js'"

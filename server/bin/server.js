@@ -1,6 +1,6 @@
+"use strict";
 const app = require('../app')();
 const {port} = require('../config');
-"use strict";
 var webpack = require('webpack');
 var WebpackDevServer = require('webpack-dev-server');
 var config = require('../webpack.config');

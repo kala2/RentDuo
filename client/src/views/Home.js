@@ -4,7 +4,6 @@ import NavBar from './NavBar.js';
 import SimpleSlider from './SimpleSlider.js';
 import TextField from 'material-ui/TextField';
 import { StickyContainer, Sticky } from 'react-sticky';
-import TransitionGroup from 'react-addons-transition-group';
 import { CSSTransitionGroup } from 'react-transition-group';
   
 class Home extends Component {
@@ -35,16 +34,16 @@ class Home extends Component {
                       <div className="row searchBarRow">
                         <div id="infoi2">
                             <TextField
-      hintText="Hint Text"
-      hintStyle={{color: "#e4e4e4"}}
-      floatingLabelText="Floating Label Text"
-    />&emsp;
+                                  hintText="Hint Text"
+                                  hintStyle={{color: "#e4e4e4"}}
+                                  floatingLabelText="Floating Label Text"
+                                />&emsp;
 
-<TextField
-      hintText="Hint Text"
-      hintStyle={{color: "#e4e4e4"}}
-      floatingLabelText="Floating Label Text"
-    />&emsp;
+                            <TextField
+                                  hintText="Hint Text"
+                                  hintStyle={{color: "#e4e4e4"}}
+                                  floatingLabelText="Floating Label Text"
+                                />&emsp;
                         </div>
                     </div>
                   </div>
@@ -56,17 +55,17 @@ class Home extends Component {
                     <CartoonsDirectory isAuthenticated={this.props.isAuthenticated} />
                     <CartoonsDirectory isAuthenticated={this.props.isAuthenticated} />
                     <CartoonsDirectory isAuthenticated={this.props.isAuthenticated} />
-                       <CartoonsDirectory isAuthenticated={this.props.isAuthenticated} />
-               <CSSTransitionGroup
+                    <CartoonsDirectory isAuthenticated={this.props.isAuthenticated} />
+                    <CSSTransitionGroup
 
-               className="example"
-      transitionName="example"
-      transitionAppear={true}
-      transitionAppearTimeout={500}
-      transitionEnter={false}
-      transitionLeave={false}>
-      <h1>Fading at Initial Mount</h1>
-    </CSSTransitionGroup>
+                    className="example"
+                      transitionName="example"
+                      transitionAppear={true}
+                      transitionAppearTimeout={500}
+                      transitionEnter={false}
+                      transitionLeave={false}>
+                      <h1>Fading at Initial Mount</h1>
+                    </CSSTransitionGroup>
                
             </StickyContainer>
          </div>

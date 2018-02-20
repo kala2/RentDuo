@@ -15,5 +15,21 @@ export const postLogin = (data) => {
         });
 }
 
+export const postRegister = (data) => {
+    console.log("data", data);
+    // return new Promise((resolve, reject) => {
+        superagent
+            .post('/registerUser')
+            .send({
+                username: data.username,
+                password: data.password
+            })
+            .set('Accept', 'application/json');
+            // .end((error, res) => {
+            //     error ? reject(error) : resolve(res);
+            // });
+    // });
+}
+
 
 

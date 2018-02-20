@@ -6,9 +6,9 @@ import { BrowserRouter as Router, Route } from 'react-router-dom';
 import Login from './views/Login.js';
 import Home from './views/Home.js';
 import Footer from './views/Footer.js';
+import Register from './views/Register.js';
 // import CartoonsDirectory from './views/CartoonsDirectory.js';
 import injectTapEventPlugin from 'react-tap-event-plugin';
-import TransitionGroup from 'react-addons-transition-group';
 
 injectTapEventPlugin();
 
@@ -42,6 +42,7 @@ class App extends Component {
                 <Col xs={12} md={12}>
                   <Route exact path="/" component={() => (<Login isAuthenticated={this.state.isAuthenticated} checkAuthentication={this.checkAuthentication} />)} />
                   <Route exact path="/home" component={() => (<Home isAuthenticated={this.state.isAuthenticated} checkAuthentication={this.checkAuthentication} />)} />
+                  <Route exact path="/register" component={() => (<Register />)} />
                   {/* <Route exact path="/app" component={() => (<CartoonsDirectory isAuthenticated={this.state.isAuthenticated} />)} /> */}
                 </Col>
               </Row>
