@@ -1,4 +1,5 @@
 import superagent from 'superagent';
+var conf = require("../config/" + (process.env.NODE_ENV || "development" || "test"));
 
 export const postLogin = (data) => {
         return new Promise((resolve, reject) => {
@@ -15,20 +16,54 @@ export const postLogin = (data) => {
         });
 }
 
+/////////////////////////Registrater user/////////////////////////
 export const postRegister = (data) => {
-    console.log("data", data);
-    // return new Promise((resolve, reject) => {
-        superagent
-            .post('/registerUser')
-            .send({
-                username: data.username,
-                password: data.password
-            })
-            .set('Accept', 'application/json');
-            // .end((error, res) => {
-            //     error ? reject(error) : resolve(res);
-            // });
-    // });
+	let url = conf.serverUrl + 'registerUser/';
+	console.log("data", data);
+	return fetch(url, {
+		method: 'POST',
+		headers: {
+			'Accept': 'application/json',
+			'Content-Type': 'application/json'
+		},
+		body: JSON.stringify(data)
+	});
+	// .then((response) => {
+	// 	if(response.status == 409) {
+	// 		//user exists
+	// 		return response.status;
+	// 	}
+	// 	else if(response.status == 202) {
+	// 		//user created
+	// 		localStorage.setItem('loggedUser', data.username);
+	// 		return response.status;
+			
+
+	// 		//login new user
+	// 		// let url = conf.serverUrl + 'login/';
+	// 		// return fetch(url, {
+	// 		// 	method: 'POST',
+	// 		// 	headers: {
+	// 		// 		'Accept': 'application/json',
+	// 		// 		'Content-Type': 'application/json'
+	// 		// 	},
+	// 		// 	body: JSON.stringify(data)
+	// 		// })
+	// 		// .then((response) => response.json())
+	// 		// .then((responseJson) => {
+	// 		// 	if(responseJson.status == 202) {
+	// 		// 		localStorage.setItem('loggedUser', responseJson.username);
+	// 		// 		return responseJson.status;
+	// 		// 	}
+	// 		// })
+	// 		// .catch((error) => {
+	// 		// 	console.error(error);
+	// 		// })
+	// 	}
+	// })
+	// .catch((error) => {
+	// 	console.error(error);
+	// })
 }
 
 

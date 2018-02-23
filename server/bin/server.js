@@ -1,6 +1,4 @@
 "use strict";
-const app = require('../app')();
-const {port} = require('../config');
 var webpack = require('webpack');
 var WebpackDevServer = require('webpack-dev-server');
 var config = require('../webpack.config');
@@ -11,7 +9,9 @@ var url = require('url');
 const MongoClient    = require('mongodb').MongoClient;
 const bodyParser     = require('body-parser');
 
-var conf = require("../configdb/" + (process.env.NODE_ENV || "development"));
+var conf = require("../config/" + (process.env.NODE_ENV || "development"));
+
+var app = express();
 
 var filter = function (pathname, req) {
     return (req.method === 'GET');
