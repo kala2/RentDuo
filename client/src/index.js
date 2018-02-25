@@ -40,8 +40,8 @@ class App extends Component {
             <Router>
               <Row around='xs'>
                 <Col xs={12} md={12}>
-                  <Route exact path="/" component={() => (<Login isAuthenticated={this.state.isAuthenticated} checkAuthentication={this.checkAuthentication} />)} />
-                  <Route exact path="/home" component={() => (<Home isAuthenticated={this.state.isAuthenticated} checkAuthentication={this.checkAuthentication} />)} />
+                  <Route exact path="/" component={() => (<Home isAuthenticated={this.state.isAuthenticated} />)} />
+                  <Route exact path="/login" component={() => (<Login isAuthenticated={this.state.isAuthenticated} checkAuthentication={this.checkAuthentication} />)} />
                   <Route exact path="/register" component={() => (<Register />)} />
                   {/* <Route exact path="/app" component={() => (<CartoonsDirectory isAuthenticated={this.state.isAuthenticated} />)} /> */}
                 </Col>

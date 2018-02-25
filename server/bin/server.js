@@ -62,7 +62,7 @@ require('../restRoutes/ApiManagement')(app);
 MongoClient.connect(conf.dbUrl, (err, database) => {
   if (err) return console.log(err)
   require('../restRoutes/MongoRestRoutes')(app, database);
-  require('../restRoutes/UserManagement')(app, database);
+  require('../restRoutes/UserManagement')(app, database.db('user_management'));
   app.listen(8080, () => {
     console.log('Express Server live on ' + 8080);
   });

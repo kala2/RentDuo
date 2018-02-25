@@ -48,14 +48,14 @@ class Home extends Component {
                     </div>
                   </div>
                 </div>
-                    <CartoonsDirectory isAuthenticated={this.props.isAuthenticated} />
-                    <CartoonsDirectory isAuthenticated={this.props.isAuthenticated} />
-                    <CartoonsDirectory isAuthenticated={this.props.isAuthenticated} />
-                    <CartoonsDirectory isAuthenticated={this.props.isAuthenticated} />
-                    <CartoonsDirectory isAuthenticated={this.props.isAuthenticated} />
-                    <CartoonsDirectory isAuthenticated={this.props.isAuthenticated} />
-                    <CartoonsDirectory isAuthenticated={this.props.isAuthenticated} />
-                    <CartoonsDirectory isAuthenticated={this.props.isAuthenticated} />
+                    <CartoonsDirectory />
+                    <CartoonsDirectory />
+                    <CartoonsDirectory />
+                    <CartoonsDirectory />
+                    <CartoonsDirectory />
+                    <CartoonsDirectory />
+                    <CartoonsDirectory />
+                    <CartoonsDirectory />
                     <CSSTransitionGroup
 
                     className="example"

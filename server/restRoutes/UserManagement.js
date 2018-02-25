@@ -1,13 +1,34 @@
 module.exports = function(app, db) {
 
+	var UserManagement = require('user-management');
+
 	/////////////////////////Registrater user/////////////////////////
 	app.post('/registerUser', (req, res) => {
 		console.log(req.body);
 		// var UserManagement = require('user-management');
-		// var USERNAME = req.body.username;
-		// var PASSWORD = req.body.password;
-		// var EXTRAS = {
-		// 	email: req.body.email,
+		var USERNAME = req.body.username;
+		var PASSWORD = req.body.password;
+		var EXTRAS = {
+			email: req.body.email
+		}
+
+		var users = new UserManagement();
+		users.load(function(err) {
+		  console.log('Checking if the user exists');
+		  users.userExists(USERNAME, function(err, exists) {
+			if (exists) {
+			  console.log('  User already exists');
+			  users.close();
+			} else {
+			  console.log('  User does not exist');
+			  console.log('Creating the user');
+			  users.createUser(USERNAME, PASSWORD, EXTRAS, function (err) {
+				console.log('  User created');
+				users.close();
+			  });
+			}
+		  });
+		});
 		// 	company: req.body.company,
 		// 	phonenumber: req.body.phonenumber,
 		// 	faxnumber:req.body.faxnumber,
@@ -145,8 +166,8 @@ module.exports = function(app, db) {
 				res.status(409).json({status: 409, result: "user not exists"});
 				res.send();
 			} else { 
-				console.log("the verified state of the item is: ", item.extras.verified);
-				if (item.extras.verified) {
+				// console.log("the verified state of the item is: ", item.extras.verified);
+				// if (item.extras.verified) {
 					if ((USERNAME != "") && (PASSWORD != "")) {
 						var users = new UserManagement();
 						users.load(function(err) {
@@ -170,10 +191,8 @@ module.exports = function(app, db) {
 							});
 						});
 					}
-				} else {
-					res.status(410).json({status: 410, result: "You must verify your email"});
 				}
-			}
+			// }
 		});
 		
 	});

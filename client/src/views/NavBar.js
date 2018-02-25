@@ -5,13 +5,16 @@ import IconMenu from 'material-ui/IconMenu';
 import MenuItem from 'material-ui/MenuItem';
 import FlatButton from 'material-ui/FlatButton';
 import MoreVertIcon from 'material-ui/svg-icons/navigation/more-vert';
+import * as utils from '../components/Utilities.js';
+
+var USERNAME = localStorage.getItem('token');
 
 class Login extends Component {
     static muiName = 'FlatButton';
   
     render() {
       return (
-        <FlatButton {...this.props} label="Login" />
+        <FlatButton {...this.props} label={this.props.label} href={this.props.href} />
       );
     }
 }
@@ -20,32 +23,43 @@ class MenuButton extends Component {
     static muiName = 'FlatButton';
     render() {
       return (
-        <FlatButton {...this.props} label="Register" href={this.props.href} className="noMarginTop" />
+        <FlatButton {...this.props} label={this.props.label} href={this.props.href} className="noMarginTop" />
       );
     }
 }
-  
-const Logged = (props) => (
-    <div>
-    
-<IconMenu
-    {...props}
-    iconButtonElement={
-       
-            <IconButton ><MoreVertIcon /></IconButton>
-            
-       
-    }
-    targetOrigin={{horizontal: 'right', vertical: 'top'}}
-    anchorOrigin={{horizontal: 'right', vertical: 'top'}}
->
-    <MenuItem primaryText="Refresh" />
-    <MenuItem primaryText="Help" />
-    <MenuItem primaryText="Sign out" />
-</IconMenu>
- </div>
-);
 
+class Logged extends Component {
+
+  constructor(props){
+		super(props);
+
+		this.handleLogoutClick= this.handleLogoutClick.bind(this);
+	}
+	
+	handleLogoutClick(event) {
+		utils.handleOnLogout({'Username': USERNAME});
+	}
+
+  render() {
+    return (
+      <div>
+      
+  <IconMenu
+      iconButtonElement={
+              <IconButton ><MoreVertIcon /></IconButton>
+      }
+      targetOrigin={{horizontal: 'right', vertical: 'top'}}
+      anchorOrigin={{horizontal: 'right', vertical: 'top'}}
+  >
+      <MenuItem primaryText="Refresh" />
+      <MenuItem primaryText="Help" />
+      <MenuItem primaryText="Sign out" onClick={this.handleLogoutClick} />
+  </IconMenu>
+   </div>
+    );
+  }
+}
+  
 Logged.muiName = 'IconMenu';
 
 export default class NavBar extends Component {
@@ -61,7 +75,20 @@ export default class NavBar extends Component {
             iconElementLeft={<img className="logoImg" src="../../images/logoResized.png" alt="logo"></img>}
             iconElementRight={
                 this.props.isAuthenticated ? 
-                <div className="row marginTop"><div className="NavBtnRight"><MenuButton href="register" label="Register"/><MenuButton /></div><Logged /></div> : (<div className="row marginTop"><div className="NavBtnRight"><Login /><Login /><Login /></div></div>)}
+                <div className="row marginTop">
+                  <div className="NavBtnRight">
+                    <MenuButton href="/" label="Home"/>
+                  </div><Logged />
+                </div> : (
+                <div className="row marginTop">
+                  <div className="NavBtnRight">
+                    <MenuButton href="/" label="Home"/>
+                    <Login href="/login" label="Login"/>
+                    <MenuButton href="/register" label="Register"/>
+                  </div>
+                </div>
+              )
+            }
         />
     );
   }

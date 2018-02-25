@@ -25,8 +25,8 @@ export default class LoginForm extends Component {
   handleSubmit(event) {
     event.preventDefault();
     utils.postLogin(this.state.content).then((result) => {
-        if(result.status === 201) {
-            localStorage.setItem('token', result.body.token);
+        if(result.status === 202) {
+            localStorage.setItem('token', result.token);
             this.props.checkAuthentication(true);
         }
     });
@@ -35,7 +35,7 @@ export default class LoginForm extends Component {
   render() {
         return (
             <div>
-                {this.props.isAuthenticated ? <Redirect to={{pathname: '/home'}} /> : (
+                {this.props.isAuthenticated ? <Redirect to={{pathname: '/'}} /> : (
                        <div>
                             <h2>This is a login form</h2>
                             {/* {!(this.state.message === '') ? <div>{this.state.message}</div> : null} */}
