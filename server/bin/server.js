@@ -55,10 +55,7 @@ app.use(bodyParser.json({limit: '50mb'}));
 app.use(cors());
 require('../restRoutes/RestRoutes')(app);
 require('../restRoutes/ApiManagement')(app);
-// require('./restRoutes/UserManagement')(app);
-// app.listen(8080, () => {
-//   console.log('Express Server live on ' + 8080);
-// });
+
 MongoClient.connect(conf.dbUrl, (err, database) => {
   if (err) return console.log(err)
   require('../restRoutes/MongoRestRoutes')(app, database);
@@ -67,11 +64,3 @@ MongoClient.connect(conf.dbUrl, (err, database) => {
     console.log('Express Server live on ' + 8080);
   });
 })
-
-
-
-// app.listen(port, () => {
-  // console.log('Express App listening on port:', port);
-// });
-
-
